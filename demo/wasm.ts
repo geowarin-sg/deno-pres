@@ -1,3 +1,7 @@
-import { greet } from "../rust-wasm/pkg/rust_wasm.wasm";
+import { instantiate } from "../wasm/lib/rs_lib.generated.js";
 
-greet();
+const { hello } = await instantiate();
+
+console.log("toto");
+
+hello();

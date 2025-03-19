@@ -1,0 +1,9 @@
+{
+  "name": "@geo/utils",
+  "tasks": {
+  },
+  "exports": {
+    "./add": "./add.ts",
+    "./substract": "./substract.ts"
+  }
+}

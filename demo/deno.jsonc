@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "cli": "deno run --watch -R -W cli.ts",
+    // tooto
+    "wasm": "deno run --watch -R wasm.ts",
+    "workspace": {
+      "description": "test the workspace",
+      "dependencies": [],
+      "command": "deno run workspace.ts"
+    }
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/async": "jsr:@std/async@^1.0.11",
+    "@std/cli": "jsr:@std/cli@^1.0.14"
+  }
+}
