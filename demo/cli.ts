@@ -1,45 +1,56 @@
-// import { delay } from "@std/async";
-// import { ProgressBar } from "@std/cli/unstable-progress-bar";
+import { Checkbox } from "@cliffy/prompt/checkbox";
+import { colors } from "@cliffy/ansi/colors";
 
-// const gen = async function* () {
-//   for (let i = 0; i < 100; ++i) {
-//     yield new Uint8Array(1000).fill(97);
-//     await delay(Math.random() * 200 | 0);
-//   }
-// }();
-// const writer = (await Deno.create("./_output.txt")).writable.getWriter();
-
-// const bar = new ProgressBar(Deno.stdout.writable, { max: 100_000 });
-
-// for await (const buffer of gen) {
-//   bar.add(buffer.length);
-//   await writer.write(buffer);
+// const pickedColors: number[] = await Checkbox.prompt({
+//   message: "Pick a color",
+//   options: [
+//     { name: "Red", value: 0xff0000, checked: true },
+//     { name: "Green", value: 0x00ff00, disabled: true },
+//     { name: "Blue", value: 0x0000ff },
+//     Checkbox.separator("--------"),
+//     { name: "White", value: 0xffffff },
+//     { name: "Black", value: 0x000000 },
+//   ],
+// });
+//
+// for (const color of pickedColors) {
+//   console.log(colors.rgb24(`You picked ${color}`, color));
 // }
 
-// await bar.end();
-// await writer.close();
-import { promptMultipleSelect } from "@std/cli/unstable-prompt-multiple-select";
-import { promptSelect } from "@std/cli/unstable-prompt-select";
-import { Spinner } from "@std/cli/unstable-spinner";
-
-const spinner = new Spinner({ message: "Loading...", color: "yellow" });
-spinner.start();
-
-setTimeout(() => {
-  spinner.stop();
-  console.log("Finished loading!");
-}, 3_000);
-
-// const browsers = promptMultipleSelect("Please select browsers:", [
-//   "safari",
-//   "chrome",
-//   "firefox",
-// ], { clear: true });
-
-// const browser = promptSelect("Please select a browser:", [
-//   "safari",
-//   "chrome",
-//   "firefox",
-// ], { clear: true });
-
-// console.log(browser);
+const title = await Checkbox.prompt({
+  message: "Pick some books",
+  search: true,
+  groupIcon: "󰉋",
+  groupOpenIcon: "󰝰",
+  confirmSubmit: false,
+  options: [
+    {
+      name: "Harry Potter",
+      options: [
+        { checked: true, name: "Harry Potter and the Great Wall of China" },
+        "Harry Potter and the Philosopher's Stone",
+        "Harry Potter and the Chamber of Secrets",
+        "Harry Potter and the Prisoner of Azkaban",
+        "Harry Potter and the Goblet of Fire",
+        "Harry Potter and the Order of the Phoenix",
+        "Harry Potter and the Half-Blood Prince",
+        "Harry Potter and the Deathly Hallows",
+      ],
+    },
+    {
+      name: "Middle-Earth",
+      options: [
+        "The Hobbit",
+        {
+          name: "The Lord of the Rings",
+          options: [
+            "The Fellowship of the Ring",
+            "The Two Towers",
+            "The Return of the King",
+          ],
+        },
+        "Silmarillion",
+      ],
+    },
+  ],
+});
